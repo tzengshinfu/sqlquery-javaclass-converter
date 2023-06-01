@@ -1,0 +1,4 @@
+package %s;
+%s
+public record %s(%s) {
+}

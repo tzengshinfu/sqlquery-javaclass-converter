@@ -1,0 +1,32 @@
+package %s;
+
+import java.util.Objects;
+%s
+public class %s {
+%s
+%s
+%s
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof %s)) {
+            return false;
+        }
+
+        %s o1 = (%s) o;
+        return %s;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(%s);
+    }
+
+    @Override
+    public String toString() {
+        return %s;
+    }
+}

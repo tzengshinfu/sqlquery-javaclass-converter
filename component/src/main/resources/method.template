@@ -1,0 +1,7 @@
+    public %s get%s() {
+        return %s;
+    }
+
+    public void set%s(%s %s) {
+        %s
+    }

@@ -1,0 +1,6 @@
+    public %s() {
+    }
+
+    public %s(%s) {
+    %s
+    }

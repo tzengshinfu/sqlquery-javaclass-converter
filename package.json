@@ -1,0 +1,167 @@
+{
+  "name": "sqlquery-javaclass-converter",
+  "displayName": "SQLQuery JavaClass Converter",
+  "description": "Converts SQL query syntax to Java data class",
+  "version": "0.0.1",
+  "publisher": "tzengshinfu",
+  "icon": "images/logo.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tzengshinfu/sqlquery-javaclass-converter"
+  },
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "sql",
+    "java",
+    "converter",
+    "mapper",
+    "data class"
+  ],
+  "activationEvents": [
+    "onLanguage:java"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "title": "SQLQuery JavaClass Converter: Convert",
+        "command": "sqlquery-javaclass-converter.convert"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "SQLQuery JavaClass Converter",
+        "properties": {
+          "sqlquery-javaclass-converter.connections": {
+            "type": "array",
+            "default": [],
+            "markdownDescription": "Saved database connections",
+            "order": 1,
+            "items": {
+              "type": "object",
+              "title": "Saved database connection",
+              "required": [
+                "connectionName",
+                "jdbcUrl",
+                "userId"
+              ],
+              "properties": {
+                "connectionName": {
+                  "type": "string",
+                  "default": "",
+                  "description": "Connection name"
+                },
+                "connectionDesc": {
+                  "type": "string",
+                  "default": "",
+                  "description": "Connection description"
+                },
+                "jdbcUrl": {
+                  "type": "string",
+                  "default": "",
+                  "description": "JDBC url"
+                },
+                "userId": {
+                  "type": "string",
+                  "default": "",
+                  "description": "User id"
+                },
+                "password": {
+                  "type": "string",
+                  "default": "",
+                  "description": "Password"
+                },
+                "useSavedPassword": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Set to `true` to use saved password, set to `false` to prompt for a password for every connection"
+                }
+              }
+            }
+          },
+          "sqlquery-javaclass-converter.defaultTemplateType": {
+            "type": "string",
+            "enum": [
+              "Class",
+              "Lombok",
+              "Record"
+            ],
+            "default": "Class",
+            "markdownDescription": "Default template type for conversion (`Lombok` needs Lombok plugin, `Record` needs Java 14+)",
+            "order": 3
+          },
+          "sqlquery-javaclass-converter.useLastTemplateType": {
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "Set to `true` to save the last input template type as `#sqlquery-javaclass-converter.defaultTemplateType#` for next conversion",
+            "order": 4
+          },
+          "sqlquery-javaclass-converter.defaultPackageName": {
+            "type": "string",
+            "default": "",
+            "markdownDescription": "Default package name for conversion",
+            "order": 5
+          },
+          "sqlquery-javaclass-converter.useLastPackageName": {
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "Set to `true` to save the last input package name as `#sqlquery-javaclass-converter.defaultPackageName#` for next conversion",
+            "order": 6
+          },
+          "sqlquery-javaclass-converter.defaultClassName": {
+            "type": "string",
+            "default": "",
+            "markdownDescription": "Default class name for conversion",
+            "order": 7
+          },
+          "sqlquery-javaclass-converter.useLastClassName": {
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "Set to `true` to save the last input class name as `#sqlquery-javaclass-converter.defaultClassName#` for next conversion",
+            "order": 8
+          },
+          "sqlquery-javaclass-converter.settingTarget": {
+            "type": "string",
+            "enum": [
+              "User",
+              "Workspace"
+            ],
+            "default": "User",
+            "markdownDescription": "Set to `User` to save current setting to Global settings, set to `Workspace` to save current setting to current Workspace settings",
+            "order": 9
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "component": "mvn --file component/pom.xml clean package && mv component/target/sqlquery-javaclass-converter-component-0.0.1.jar resources/"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.78.0",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "eslint": "^8.39.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.0.4",
+    "@vscode/test-electron": "^2.3.0"
+  },
+  "dependencies": {
+	"tslib": "^2.5.2"
+  }
+}
